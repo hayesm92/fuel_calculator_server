@@ -41,6 +41,10 @@ const trackList = {
     
 }
 
+app.get('/', (req,res) => {
+    res.send('its working');
+});
+
 app.post('/post', (req, res) => {
     for (const [key, value] of Object.entries(trackList)) {
         if (req.body.track === key) {
