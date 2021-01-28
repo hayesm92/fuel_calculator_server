@@ -7,10 +7,14 @@ const app = express();
 const db = knex({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        user: 'postgres',
-        password: 'nOMAD92*',
-        database: 'acc'
+        connectionString: {
+            host: process.env.DATABASE_URL,
+            ssl: true
+        }
+
+        // user: 'postgres',
+        // password: 'nOMAD92*',
+        // database: 'acc'
     }
 
 });
@@ -38,10 +42,10 @@ const trackList = {
     'Suzuka': 'suzuka',
     'Zandvoort': 'zandvoort',
     'Zolder': 'zolder',
-    
+
 }
 
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.send('its working');
 });
 
@@ -62,7 +66,7 @@ app.post('/post', (req, res) => {
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 3000;
+    port = 3000;
 }
 
 app.listen(process.env.PORT, console.log(`app is running on port ${process.env.PORT}`));
