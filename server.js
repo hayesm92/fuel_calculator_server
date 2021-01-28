@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
     res.send('its working');
 });
 
-app.post('/post', (req, res) => {
+app.post('/liters', (req, res) => {
     for (const [key, value] of Object.entries(trackList)) {
         if (req.body.track === key) {
             db.select('car', value).from('liters').where({ car: req.body.car })
@@ -69,3 +69,4 @@ if (port == null || port == "") {
 }
 
 app.listen(process.env.PORT, console.log(`app is running on port ${process.env.PORT}`));
+
