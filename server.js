@@ -8,7 +8,8 @@ const db = knex({
     client: 'pg',
     connection: {
         connectionString: process.env.DATABASE_URL,
-        rejectUnauthorized: false
+        rejectUnauthorized: false,
+        ssl: true,
         }
 
         // user: 'postgres',
@@ -63,12 +64,13 @@ app.post('/liters', (req, res) => {
     }
 });
 
+
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 3000;
 }
 
-app.listen(process.env.PORT, console.log(`app is running on port ${process.env.PORT}`));
-
+// app.listen(process.env.PORT, console.log(`app is running on port ${process.env.PORT}`));
+app.listen(3000);
 
 
