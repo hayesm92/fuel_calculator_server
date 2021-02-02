@@ -4,12 +4,16 @@ const cors = require('cors')
 const knex = require('knex')
 const app = express();
 
+
 const db = knex({
     client: 'pg',
     connection: {
         connectionString: process.env.DATABASE_URL,
+    ssl: {
         rejectUnauthorized: false,
-        ssl: true,
+    }
+        
+       
         }
 
         // user: 'postgres',
