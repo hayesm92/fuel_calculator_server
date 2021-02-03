@@ -4,6 +4,7 @@ const cors = require('cors')
 const knex = require('knex')
 const app = express();
 
+
 const db = knex({
     client: 'pg',
     connection: {
@@ -17,7 +18,6 @@ const db = knex({
     
 
 });
-
 
 
 app.use(bodyParser.json());
@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
     res.send('its working');
 });
 
+app.options('*', cors())
 app.post('/liters', (req, res) => {
     for (const [key, value] of Object.entries(trackList)) {
         if (req.body.track === key) {
@@ -69,7 +70,7 @@ if (port == null || port == "") {
     port = 3000;
 }
 
-// app.listen(process.env.PORT, console.log(`app is running on port ${process.env.PORT}`));
-app.listen(3000);
+app.listen(process.env.PORT, console.log(`app is running on port ${process.env.PORT}`));
+
 
 
