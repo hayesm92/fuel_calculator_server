@@ -12,13 +12,20 @@ const db = knex({
         connectionString: process.env.DATABASE_URL,
         rejectUnauthorized: false,
         }
+});
 
-        // user: 'postgres',
-        // password: 'nOMAD92*',
-        // database: 'acc'
+
+// const db = knex({
+//     client: 'pg',
+//     connection: {
+//       host: '127.0.0.1',
+//       user: 'postgres',
+//       password: 'nOMAD92*',
+//       database: 'acc'
+//     }
     
 
-});
+// });
 
 
 app.use(bodyParser.json());
@@ -44,12 +51,47 @@ const trackList = {
     'Zolder': 'zolder',
 
 }
+app.options('*', cors())
 
 app.get('/', (req, res) => {
     res.send('its working');
 });
+app.get('/cars', (req,res) =>{
+    db.select('car').from('liters').orderBy('car')
+    .then(cars => {
+       const arr = []; 
+       const carList = [];
+       cars.forEach(car => {
+         arr.push(Object.values(car));
+        })
+       arr.forEach(car => {
+           carList.push(car[0]);
+       })
+        console.log(carList);
+        res.json(carList)
+    })
+    .catch( err => res.json(err)
+    )
+})
+app.get('/tracks', (req,res) =>{
+    db.select('car').from('liters').orderBy('car')
+    .then(cars => {
+       const arr = []; 
+       const carList = [];
+       cars.forEach(car => {
+         arr.push(Object.values(car));
+        })
+       arr.forEach(car => {
+           carList.push(car[0]);
+       })
+        console.log(carList);
+        res.json(carList)
+    })
+    .catch( err => res.json(err)
+    )
+})
 
-app.options('*', cors())
+
 app.post('/liters', (req, res) => {
     for (const [key, value] of Object.entries(trackList)) {
         if (req.body.track === key) {
@@ -72,6 +114,8 @@ if (port == null || port == "") {
 }
 
 app.listen(process.env.PORT, console.log(`app is running on port ${process.env.PORT}`));
+// app.listen(3000);
+
 
 
 
