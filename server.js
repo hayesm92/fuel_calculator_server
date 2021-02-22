@@ -51,11 +51,9 @@ const trackList = {
     'Zolder': 'zolder',
 
 }
+
 app.options('*', cors())
 
-app.get('/', (req, res) => {
-    res.send('its working');
-});
 app.get('/cars', (req,res) =>{
     db.select('car').from('liters').orderBy('car')
     .then(cars => {
@@ -74,22 +72,22 @@ app.get('/cars', (req,res) =>{
     )
 })
 app.get('/tracks', (req,res) =>{
-    db.select('car').from('liters').orderBy('car')
-    .then(cars => {
-       const arr = []; 
-       const carList = [];
-       cars.forEach(car => {
-         arr.push(Object.values(car));
-        })
-       arr.forEach(car => {
-           carList.push(car[0]);
-       })
-        console.log(carList);
-        res.json(carList)
-    })
-    .catch( err => res.json(err)
-    )
-})
+    
+        try {
+            const arr = [];
+            arr.push(Object.keys(trackList));
+            res.json(arr[0]);
+            
+        } catch (error) {
+            res.status(404).json("404 Not Found. The requested resource could not be found.");
+           
+            
+        }
+       
+        
+        
+       
+    });
 
 
 app.post('/liters', (req, res) => {
