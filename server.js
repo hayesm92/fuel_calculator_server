@@ -15,19 +15,6 @@ const db = knex({
 });
 
 
-// const db = knex({
-//     client: 'pg',
-//     connection: {
-//       host: '127.0.0.1',
-//       user: 'postgres',
-//       password: 'nOMAD92*',
-//       database: 'acc'
-//     }
-    
-
-// });
-
-
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
